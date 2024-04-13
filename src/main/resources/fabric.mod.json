@@ -1,0 +1,34 @@
+{
+	"schemaVersion": 1,
+	"id": "doubleclickspersecond",
+	"version": "${version}",
+	"name": "DoubleClicksPerSecond",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Rapsac"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/doubleclickspersecond/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"client": [
+			"net.rapsac.doubleclickspersecond.DoubleClicksPerSecondClient"
+		]
+	},
+	"mixins": [
+		"doubleclickspersecond.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.9",
+		"minecraft": "~1.19.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

@@ -13,7 +13,7 @@
 	},
 	"license": "MIT",
 	"icon": "assets/doubleclickspersecond/icon.png",
-	"environment": "*",
+	"environment": "client",
 	"entrypoints": {
 		"client": [
 			"net.rapsac.doubleclickspersecond.DoubleClicksPerSecondClient"

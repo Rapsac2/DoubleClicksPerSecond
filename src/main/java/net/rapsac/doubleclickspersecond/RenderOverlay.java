@@ -15,9 +15,10 @@ import java.awt.Color;
 
 public class RenderOverlay implements HudRenderCallback {
 
-    MinecraftClient client = MinecraftClient.getInstance();
+    //MinecraftClient client = MinecraftClient.getInstance();
     public static int xOffset = 0;
     public static int yOffset = 15;
+    public static int cps = 0;
 
     //@Override
     //public void onHudRender(DrawContext context, float tickDelta){ // hier wird gerendert in 1.20.4
@@ -27,7 +28,12 @@ public class RenderOverlay implements HudRenderCallback {
     @Override
     public void onHudRender(MatrixStack matrixStack, float tickDelta) { // hier wird in der 1.19.4 gerendert
         //DoubleClicksPerSecondClient.LOGGER.info("render");
-        render(matrixStack);
+        cps = InputHandler.Cps();
+        if(DoubleClicksPerSecondClient.ShouldRenderOverlay()){
+            render(matrixStack);
+        }
+        return;
+        
     }
     
 
@@ -36,15 +42,15 @@ public class RenderOverlay implements HudRenderCallback {
         if(client != null){
             //context.drawText(MinecraftClient.getInstance().textRenderer, Integer.toString(InputHandler.Cps()), XValue(), YValue(), color(), false);
             TextRenderer renderer = client.textRenderer;
-            renderer.draw(matrixStack, Integer.toString(InputHandler.Cps()), XValue() - client.textRenderer.getWidth(Integer.toString(InputHandler.Cps())), YValue(), color());
+            renderer.draw(matrixStack, Integer.toString(cps), XValue(client) , YValue(client), color());
         }
     }
-    public float XValue(){
+    public float XValue(MinecraftClient client){
        // return (int) ((float) client.getWindow().getScaledWidth() / 2f) + xOffset;
         //DoubleClicksPerSecondClient.LOGGER.info(Float.toString(((float) MinecraftClient.getInstance().getWindow().getScaledWidth() / 2f) + xOffset));
-        return ((float) MinecraftClient.getInstance().getWindow().getScaledWidth() / 2f) + xOffset;
+        return ((float) client.getWindow().getScaledWidth() / 2f) + xOffset- (client.textRenderer.getWidth(Integer.toString(InputHandler.Cps()))/2f);
     }
-    public float YValue(){
+    public float YValue(MinecraftClient client){
         //return (int) ((float) client.getWindow().getScaledHeight() / 2f) + yOffset;
         return ((float) client.getWindow().getScaledHeight() / 2f) + yOffset;
     }

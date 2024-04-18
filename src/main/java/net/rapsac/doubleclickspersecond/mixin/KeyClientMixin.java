@@ -12,16 +12,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(MinecraftClient.class)
 public class KeyClientMixin {
 	@Inject(at = @At(value = "HEAD"), method = "doAttack")
-    private void onAttack(CallbackInfoReturnable<Boolean> cir) // eventuell nicht callbackinfo sondern das andere
+    private void onAttack(CallbackInfoReturnable<Boolean> cir)
     {
-        DoubleClicksPerSecondClient.LOGGER.info("links 1 ---------------------------------------------------");
+        //DoubleClicksPerSecondClient.LOGGER.info("links 1 ---------------------------------------------------");
         InputHandler.Clicking();
     }
 
     @Inject(at = @At(value = "HEAD"), method = "doItemUse")
     private void onItemUse(CallbackInfo ci)
     {
-        DoubleClicksPerSecondClient.LOGGER.info("rechts 1 ---------------------------------------------------");
+        //DoubleClicksPerSecondClient.LOGGER.info("rechts 1 ---------------------------------------------------");
         InputHandler.Clicking();
         
     }

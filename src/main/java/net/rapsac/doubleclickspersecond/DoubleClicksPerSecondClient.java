@@ -24,28 +24,28 @@ public class DoubleClicksPerSecondClient implements ClientModInitializer {
 	public static final String MOD_ID = "doubleclickspersecond";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-	public static boolean renderOverlayBool = true;
+	public static boolean shouldRenderOverlayBool = false;
 	
 	@Override
 	public void onInitializeClient() {
-		KeyBinding RenderCpsKey = KeyBindingHelper.registerKeyBinding(new KeyBinding(MOD_ID, InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "category.tiptapshow.main"));
+		KeyBinding RenderCpsKey = KeyBindingHelper.registerKeyBinding(new KeyBinding("toggle CPS", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "DoubleClicksPerSecond"));
 		
 		
 		HudRenderCallback.EVENT.register(new RenderOverlay()); // initializes render
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			if (RenderCpsKey.wasPressed()){
-				if(renderOverlayBool){
-					renderOverlayBool = false;
+				if(shouldRenderOverlayBool){
+					shouldRenderOverlayBool = false;
 				}else{
-					renderOverlayBool = true;
+					shouldRenderOverlayBool = true;
 				}
 			}
 		});
 	}
 	
 	
-	public static boolean RenderOverlay(){
-		return renderOverlayBool;
+	public static boolean ShouldRenderOverlay(){
+		return shouldRenderOverlayBool;
 	}
 }
